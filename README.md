@@ -1,0 +1,3 @@
+# gosample
+
+go sample code
