@@ -65,3 +65,24 @@ func (l *Node) StringV3() string {
 	}
 	return strings.Join(lst, "->")
 }
+
+func (l *Node) Reverse() *Node {
+	var pre *Node
+	cur := l
+	for cur != nil {
+		cur, cur.Next, pre = cur.Next, pre, cur
+	}
+	return pre
+}
+
+func (l *Node) Cmp(o *Node) bool {
+	t1, t2 := l, o
+	for t1 != nil && t2 != nil {
+		if t1.Value != t2.Value {
+			return false
+		}
+		t1 = t1.Next
+		t2 = t2.Next
+	}
+	return t1 == nil && t2 == nil
+}

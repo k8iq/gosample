@@ -1,6 +1,8 @@
 package link
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestNewAndString(t *testing.T) {
 	if New().String() != "" {
@@ -35,6 +37,30 @@ func TestNewAndStringV3(t *testing.T) {
 	}
 	if New(1, 2, 3).StringV3() != "1->2->3" {
 		t.Error("link.New(1,2,3) error")
+	}
+}
+
+func TestCmp(t *testing.T) {
+	if !New().Cmp(New()) || !New().Cmp(nil) {
+		t.Error("error: New() != New()")
+	}
+	if !New(1, 2, 3).Cmp(New(1, 2, 3)) {
+		t.Error("error: New(1,2,3) != New(1,2,3)")
+	}
+
+	l := New(1, 2, 3, 4, 5)
+	if !l.Cmp(l) {
+		t.Error("error: New(1,2,3,4,5) != self")
+	}
+}
+
+func TestReverse(t *testing.T) {
+	if New().Reverse().String() != "" {
+		t.Error("error: New().Reverse()")
+	}
+
+	if New(1, 2, 3).Reverse().String() != "3->2->1" {
+		t.Error("error: New(1,2,3).Reverse()")
 	}
 }
 
